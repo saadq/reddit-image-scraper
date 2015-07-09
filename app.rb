@@ -12,7 +12,6 @@ class App < Sinatra::Base
     erb :results
   end
 
-
   def scrape_reddit
     sub   = params[:subreddit]
     score = params[:score].to_i
