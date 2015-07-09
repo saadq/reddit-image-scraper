@@ -20,8 +20,8 @@
       <h4>from the last <%= params[:submissions] %> submissions</h4>
     </header>
 
-    <% for @img in @imgs -%>
-      <% if @cnt == 1 -%>
+    <% for @img in @imgs %>
+      <% if @cnt == 1 %>
         <div class="row">
       <% end %>
 
@@ -35,13 +35,13 @@
         </p>
       </div>
 
-      <% if @cnt == 3 -%>
+      <% if @cnt == 3 %>
         </div>
         <% @cnt = 0 %>
-      <% end -%>
+      <% end %>
 
       <% @cnt += 1 %>
-    <% end -%>
+    <% end %>
   </div>
 </body>
 
