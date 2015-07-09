@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reddit Image Scraper | Results</title>
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css">
+  <link rel="stylesheet" type="text/css" href="/css/results.css">
+</head>
+
+<body>
+  <% @imgs = scrape_reddit %>
+  <% @cnt = 1 %>
+
+  <div class="container">
+    <header>
+      <h2><%= @imgs.length %> results</h2>
+      <h4>from the last <%= params[:submissions] %> submissions</h4>
+    </header>
+
+    <% for @img in @imgs -%>
+      <% if @cnt == 1 -%>
+        <div class="row">
+      <% end %>
+
+      <div class="one-third column">
+        <a href="<%= @img[:url] %>">
+          <img class="u-max-full-width" src="<%= @img[:url] %>">
+        </a>
+        <p>
+          <%= @img[:title] %><br>
+          Score: <%= @img[:score] %>
+        </p>
+      </div>
+
+      <% if @cnt == 3 -%>
+        </div>
+        <% @cnt = 0 %>
+      <% end -%>
+
+      <% @cnt += 1 %>
+    <% end -%>
+  </div>
+</body>
+
+</html>

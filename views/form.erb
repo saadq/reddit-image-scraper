@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Reddit Image Scraper</title>
+  <meta name="description" content="An image scraper for Reddit written in Ruby.">
+  <meta name="author" content="Saad Quadri">
+
+<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Lato:400,300,500,600" rel="stylesheet" type="text/css">
+
+<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css">
+  <link rel="stylesheet" type="text/css" href="/css/form.css">
+
+<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+</head>
+
+<body>
+<!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div id="wrapper">
+    <div class="container">
+      <div id="content">
+
+        <header>
+          <div class="row">
+            <div class="twelve columns">
+              <a href="/"><img class="u-max-small-width" src="/img/reddit-logo.png"></a>
+              <h1>Reddit Image Scraper</h1>
+              <p>Grab images from your favorite subreddit!</p>
+            </div>
+          </div>
+        </header>
+
+        <form id="form" action="/results" method="post">
+          <div class="form-field row">
+            <p>Subreddit Name: </p>
+            <input name="subreddit" id="subreddit" class="offset-by-three six columns" type="text" placeholder="kittens" value>
+          </div>
+
+          <div class="form-field row">
+            <p>Minimum Karma Score: </p>
+            <input name="score" id="score" class="offset-by-three six columns" type="text" placeholder="50" value>
+          </div>
+
+          <div class="form-field row">
+            <p>Number of Submissions to Scrape:</p>
+            <input name="submissions" id="num-of-submissions" class="offset-by-three six columns" type="text" placeholder="15" value>
+          </div>
+
+          <div class="form-field row">
+          <button id="submit-button" type="submit">Get Images!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>Made by <a href="http://saadquadri.com">Saad Quadri</a>. Check out the source code on <a href="https://www.github.com/saadq">GitHub</a></p>
+    <p>reddit and the alien logo are registered trademarks of <a href="http://reddit.com">reddit inc.</a></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

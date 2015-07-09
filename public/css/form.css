@@ -1,0 +1,130 @@
+body {
+  background-color: #90A4AE;
+  font-family: 'Lato' !important;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: bolder;
+  color: #EF5350;
+  letter-spacing: 1px;
+  text-shadow: .5px .5px .5px #000;
+}
+
+p {
+  font-size: 1.75rem;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #EF5350;
+}
+
+button, button:focus {
+  -webkit-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow:    inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow:         inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  background-color: #EF5350;
+  border: 1px solid #bbb;
+  color: #fff;
+  text-transform: none;
+  font-size: 1.5rem;
+}
+
+button:hover {
+  color: #fff;
+  position: relative;
+  top: 1px;
+  -webkit-box-shadow: inset 0px 3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow:    inset 0px 3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  box-shadow:         inset 0px 3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+}
+
+button:active {
+  position: relative;
+  top: 3px;
+  -webkit-box-shadow: inset 0px -3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow:    inset 0px -3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  box-shadow:         inset 0px -3px 1px rgba(239, 83, 80, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+}
+
+*::selection {
+  background-color: #E1F5FE;
+}
+
+#wrapper {
+  margin: 0 20px;
+}
+
+#wrapper .container {
+  background-color: #FBffff;
+  border: 1px solid #000;
+  border-radius: .25em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  max-width: 600px;
+  -moz-box-shadow:    inset 0 0 3px #000000;
+  -webkit-box-shadow: inset 0 0 3px #000000;
+  box-shadow:         inset 0 0 3px #000000;
+}
+
+#content {
+  margin: 0 20px;
+  text-align: center;
+}
+
+.form-field {
+  margin: 15px 0;
+}
+
+.form-field input {
+  height: 50px;
+}
+
+.form-field input[placeholder] {
+  font-size: 2.5rem;
+}
+
+.form-field p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+#submit-button {
+  font-size: 2rem;
+  margin-top: 30px;
+  width: 225px;
+  height: 70px;
+}
+
+footer {
+  margin-top: 20px;
+  padding: 20px 0 40px 0;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+footer a {
+  border-bottom: 1px dotted #000;
+  transition: border .15s ease, color .15s ease;
+}
+
+footer a:hover {
+  border-color: #fff;
+  color: #fff;
+  opacity: 1;
+}

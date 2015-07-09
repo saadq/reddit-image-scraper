@@ -1,0 +1,28 @@
+body {
+  background-color: #E1F5FE;
+}
+
+.container {
+  background-color: white;
+}
+
+.row {
+  margin: 20px;
+}
+
+header {
+  margin-left: 10px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+h2, h5 {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  margin: 10px 0;
+}
