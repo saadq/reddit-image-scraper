@@ -72,7 +72,7 @@ class App < Sinatra::Base
   # Checks to see if the image url
   # is an album or a gallery
   #
-  # @param [String] img - The
+  # @param [String] img - The URL received frmo Reddit's JSON for a specific post
   # @return [Boolean]
   #
   def album?(img)
