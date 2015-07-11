@@ -12,7 +12,12 @@ class App < Sinatra::Base
     erb :results
   end
 
-
+  #
+  # Main scraper method that takes the user
+  # input from the form and scrapes reddit.com
+  #
+  # @return [Array] images - An array of hashes that contain info about each image
+  #
   def scrape_reddit
     sub   = params[:subreddit]
     score = params[:score].to_i
@@ -40,16 +45,36 @@ class App < Sinatra::Base
     images
   end
 
+  #
+  # Checks to see if the image url is an
+  # imgur link and that it is not an album or gallery
+  #
+  # @param [String] img - The URL received from Reddit's JSON for a specific post
+  # @return [Boolean]
+  #
   def valid_img?(img)
     imgur?(img) && !album?(img) && !img[:url].end_with?('.gifv')
   end
 
+  #
+  # Checks to see if the image url is an imgur link
+  #
+  # @param [String] img  - The URL received from Reddit's JSON for a specific post
+  # @return [Boolean]
+  #
   def imgur?(img)
     img[:url][7..11] == 'imgur' ||
     img[:url][7..11] == 'i.img' ||
     img[:url][7..11] == 'm.img'
   end
 
+  #
+  # Checks to see if the image url
+  # is an album or a gallery
+  #
+  # @param [String] img - The
+  # @return [Boolean]
+  #
   def album?(img)
     img[:url][16..18] == '/a/' || img[:url][16..18] == '/ga'
   end
