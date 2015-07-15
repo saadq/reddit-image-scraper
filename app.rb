@@ -30,13 +30,14 @@ class App < Sinatra::Base
 
     count.times do |n|
       img = {
-        title: reddit_json['data']['children'][n]['data']['title'],
-        url:   reddit_json['data']['children'][n]['data']['url'],
-        score: reddit_json['data']['children'][n]['data']['score']
+        title:    reddit_json['data']['children'][n]['data']['title'],
+        img_url:  reddit_json['data']['children'][n]['data']['url'],
+        post_url: reddit_json['data']['children'][n]['data']['permalink'],
+        score:    reddit_json['data']['children'][n]['data']['score']
       }
 
       if valid_img?(img) && img[:score] >= score
-        img[:url] << '.gif'
+        img[:img_url] << '.gif'
         images << img
       end
     end
@@ -53,7 +54,7 @@ class App < Sinatra::Base
     imgur?(img) &&
     !album?(img) &&
     !gallery?(img) &&
-    !img[:url].end_with?('.gifv')
+    !img[:img_url].end_with?('.gifv')
   end
 
   # Checks to see if the image url is an imgur link
@@ -61,9 +62,9 @@ class App < Sinatra::Base
   # @param [String] img  - The URL received from Reddit's JSON for a specific post
   # @return [Boolean]
   def imgur?(img)
-    img[:url][7..11] == 'imgur' ||
-    img[:url][7..11] == 'i.img' ||
-    img[:url][7..11] == 'm.img'
+    img[:img_url][7..11] == 'imgur' ||
+    img[:img_url][7..11] == 'i.img' ||
+    img[:img_url][7..11] == 'm.img'
   end
 
   # Checks to see if the image url is an album
@@ -71,8 +72,8 @@ class App < Sinatra::Base
   # @param [String] img - The URL received frmo Reddit's JSON for a specific post
   # @return [Boolean]
   def album?(img)
-    img[:url][16..18] == '/a/' ||
-    img[:url][18..20] == '/a/'
+    img[:img_url][16..18] == '/a/' ||
+    img[:img_url][18..20] == '/a/'
   end
 
   # Checks to see if the image url is a gallery
@@ -80,7 +81,7 @@ class App < Sinatra::Base
   # @param [String] img - The URL received frmo Reddit's JSON for a specific post
   # @return [Boolean]
   def gallery?(img)
-    img[:url][16..18] == '/ga' ||
-    img[:url][18..20] == '/ga'
+    img[:img_url][16..18] == '/ga' ||
+    img[:img_url][18..20] == '/ga'
   end
 end
