@@ -8,6 +8,7 @@ body {
 
 .row {
   margin: 20px;
+  text-align: center;
 }
 
 header {
@@ -25,4 +26,5 @@ h2, h5 {
 
 img {
   margin: 10px 0;
+  height: 250px;
 }
