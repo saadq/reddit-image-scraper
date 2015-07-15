@@ -48,18 +48,18 @@ class App < Sinatra::Base
   # Checks to see if the image url is an
   # imgur link and that it is not an album or gallery
   #
-  # @param [String] img - The URL received from Reddit's JSON for a specific post
+  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
   def valid_img?(img)
     imgur?(img) &&
     !album?(img) &&
     !gallery?(img) &&
-    !img[:img_url].end_with?('.gifv')
+    !gifv?(img)
   end
 
   # Checks to see if the image url is an imgur link
   #
-  # @param [String] img  - The URL received from Reddit's JSON for a specific post
+  # @param [Hash] img  - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
   def imgur?(img)
     img[:img_url][7..11] == 'imgur' ||
@@ -69,7 +69,7 @@ class App < Sinatra::Base
 
   # Checks to see if the image url is an album
   #
-  # @param [String] img - The URL received frmo Reddit's JSON for a specific post
+  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
   def album?(img)
     img[:img_url][16..18] == '/a/' ||
@@ -78,10 +78,18 @@ class App < Sinatra::Base
 
   # Checks to see if the image url is a gallery
   #
-  # @param [String] img - The URL received frmo Reddit's JSON for a specific post
+  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
   def gallery?(img)
     img[:img_url][16..18] == '/ga' ||
     img[:img_url][18..20] == '/ga'
+  end
+
+  # Checks to see if the image url has a .gifv extension
+  #
+  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
+  # @return [Boolean]
+  def gifv?(img)
+    img[:img_url].end_with?('.gifv')
   end
 end
