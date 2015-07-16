@@ -17,6 +17,7 @@ class App < Sinatra::Base
   # from reddit.com
   #
   # @return [Array] images - An array of hashes that contain info about each image
+  #
   def scrape_reddit
     sub   = params[:subreddit]
     score = params[:score].to_i
@@ -50,6 +51,7 @@ class App < Sinatra::Base
   #
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
+  #
   def valid_img?(img)
     imgur?(img) &&
     !album?(img) &&
@@ -61,6 +63,7 @@ class App < Sinatra::Base
   #
   # @param [Hash] img  - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
+  #
   def imgur?(img)
     img[:img_url][7..11] == 'imgur' ||
     img[:img_url][7..11] == 'i.img' ||
@@ -71,6 +74,7 @@ class App < Sinatra::Base
   #
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
+  #
   def album?(img)
     img[:img_url][16..18] == '/a/' ||
     img[:img_url][18..20] == '/a/'
@@ -80,6 +84,7 @@ class App < Sinatra::Base
   #
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
+  #
   def gallery?(img)
     img[:img_url][16..18] == '/ga' ||
     img[:img_url][18..20] == '/ga'
@@ -89,6 +94,7 @@ class App < Sinatra::Base
   #
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
+  #
   def gifv?(img)
     img[:img_url].end_with?('.gifv')
   end
