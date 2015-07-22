@@ -57,7 +57,7 @@ class App < Sinatra::Base
     !album?(img) &&
     !gallery?(img) &&
     !gifv?(img) &&
-    !multiple_imgs?
+    !multiple_imgs?(img)
   end
 
   # Checks to see if the image url is an imgur link
