@@ -47,7 +47,7 @@ class App < Sinatra::Base
   end
 
   # Checks to see if the image url is an
-  # imgur link and that it is not an album or gallery
+  # imgur link and that it is only a single image
   #
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
