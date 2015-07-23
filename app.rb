@@ -105,7 +105,7 @@ class App < Sinatra::Base
   # @param [Hash] img - The image details received from Reddit's JSON for a specific post
   # @return [Boolean]
   #
-  def multiple_imgs(img)
+  def multiple_imgs?(img)
     img[:img_url][17..-1].include?(',')
   end
 end
