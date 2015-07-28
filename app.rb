@@ -54,10 +54,8 @@ class App < Sinatra::Base
   #
   def valid_img?(img)
     imgur?(img) &&
-    !album?(img) &&
-    !gallery?(img) &&
-    !gifv?(img) &&
-    !multiple_imgs?(img)
+    !multiple_imgs?(img) &&
+    !gifv?(img)
   end
 
   # Checks to see if the image url is an imgur link
@@ -69,6 +67,17 @@ class App < Sinatra::Base
     img[:img_url][7..11] == 'imgur' ||
     img[:img_url][7..11] == 'i.img' ||
     img[:img_url][7..11] == 'm.img'
+  end
+
+  # Checks to see if the image url contains more than one image
+  #
+  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
+  # @return [Boolean]
+  #
+  def multiple_imgs?(img)
+    album?(img) ||
+    gallery?(img) ||
+    img[:img_url][17..-1].include?(',')
   end
 
   # Checks to see if the image url is an album
@@ -98,14 +107,5 @@ class App < Sinatra::Base
   #
   def gifv?(img)
     img[:img_url].end_with?('.gifv')
-  end
-
-  # Checks to see if the image url contains more than one image
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
-  #
-  def multiple_imgs?(img)
-    img[:img_url][17..-1].include?(',')
   end
 end
