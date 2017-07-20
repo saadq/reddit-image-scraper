@@ -8,23 +8,21 @@ class App < Sinatra::Base
   end
 
   post '/results' do
-    scrape_reddit
+    @imgs = scrape_reddit
     erb :results
   end
 
   # Main scraper method that takes the user
   # input from the form and scrapes a subreddit
   # from reddit.com
-  #
-  # @return [Array] images - An array of hashes that contain info about each image
   def scrape_reddit
     sub   = params[:subreddit]
     score = params[:score].to_i
     count = params[:submissions].to_i
 
-    url = "https://reddit.com/r/#{sub}/.json?limit=#{count}"
-    reddit = open(url).read
-    reddit_json = JSON.parse(reddit)
+    url = "http://reddit.com/r/#{sub}/.json?limit=#{count}"
+    res = open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}").read
+    reddit_json = JSON.parse(res)
 
     images = []
 
@@ -37,7 +35,7 @@ class App < Sinatra::Base
       }
 
       if valid_img?(img) && img[:score] >= score
-        img[:img_url] << '.gif'
+        normalize_url(img[:img_url])
         images << img
       end
     end
@@ -47,29 +45,27 @@ class App < Sinatra::Base
 
   # Checks to see if the image url is an
   # imgur link and that it is only a single image
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def valid_img?(img)
-    imgur?(img) &&
+    img != nil &&
+    !img.empty? &&
+    (imgur?(img) || ireddit?(img)) &&
     !multiple_imgs?(img) &&
     !gifv?(img)
   end
 
   # Checks to see if the image url is an imgur link
-  #
-  # @param [Hash] img  - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def imgur?(img)
     img[:img_url][7..11] == 'imgur' ||
     img[:img_url][7..11] == 'i.img' ||
     img[:img_url][7..11] == 'm.img'
   end
 
+  # Checks to see if the image url is an ireddit link
+  def ireddit?(img)
+    img[:img_url][8..16] == 'i.redd.it'
+  end
+
   # Checks to see if the image url contains more than one image
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def multiple_imgs?(img)
     album?(img) ||
     gallery?(img) ||
@@ -77,28 +73,34 @@ class App < Sinatra::Base
   end
 
   # Checks to see if the image url is an album
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def album?(img)
     img[:img_url][16..18] == '/a/' ||
     img[:img_url][18..20] == '/a/'
   end
 
   # Checks to see if the image url is a gallery
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def gallery?(img)
     img[:img_url][16..18] == '/ga' ||
     img[:img_url][18..20] == '/ga'
   end
 
   # Checks to see if the image url has a .gifv extension
-  #
-  # @param [Hash] img - The image details received from Reddit's JSON for a specific post
-  # @return [Boolean]
   def gifv?(img)
     img[:img_url].end_with?('.gifv')
+  end
+
+  # Normalizes an imgur url to start with i.imgur
+  def normalize_url(img_url)
+    if img_url[7..11] == 'imgur'
+      img_url.insert(7, 'i.')
+      if (
+        !img_url.end_with?('.gif') ||
+        !img_url.end_with('.jpg') ||
+        !img_url.end_with('.png') ||
+        !img_url.end_with('.jpeg')
+      )
+        img_url << '.gif'
+      end
+    end
   end
 end
