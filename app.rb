@@ -20,7 +20,7 @@ class App < Sinatra::Base
     score = params[:score].to_i
     count = params[:submissions].to_i
 
-    url = "http://reddit.com/r/#{sub}/.json?limit=#{count}"
+    url = "https://reddit.com/r/#{sub}/.json?limit=#{count}"
     res = open(url, "User-Agent" => "Ruby/#{RUBY_VERSION}").read
     reddit_json = JSON.parse(res)
 
